@@ -13,25 +13,28 @@ export class AxSelect extends LitElement {
 
   static get properties() {
     return {
-      title: { type: String },
-      counter: { type: Number },
+      label: { type: String },
+      options: { type: Array },
+      formUpdate: { type: Function },
+      name: { type: String },
+      value: { type: String },
     };
   }
 
-  constructor() {
-    super();
-    this.title = 'Hey there';
-    this.counter = 5;
-  }
-
-  __increment() {
-    this.counter += 1;
+  onChange(event) {
+    this.formUpdate([ this.name, event.target.value]);
   }
 
   render() {
     return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+      <label for="pet-select">${this.label}</label>
+
+      <select name=${this.name} id="pet-select" @change="${this.onChange}">
+        <option value="">--Please choose an option--</option>
+        ${this.options.map(
+          option => html`<option value=${option.value}>${option.label}</option>`
+        )}
+      </select>
     `;
   }
 }
