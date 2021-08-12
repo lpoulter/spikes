@@ -26,11 +26,11 @@ export class AxForm extends LitElement {
       { label: 'Retrievers', value: 'Golden Retriever' },
     ];
     this.data = { dog: 'Dachshund' };
-    this.formUpdate = this.formUpdate.bind(this);
+    this.addEventListener('form-updated', this.formUpdated);
   }
 
-  formUpdate(newValue) {
-    const [name, value] = newValue;
+  formUpdated({ detail }) {
+    const { name, value } = detail;
     this.data[name] = value;
     this.requestUpdate();
   }
@@ -47,9 +47,8 @@ export class AxForm extends LitElement {
       <ax-select
         label="pick one"
         name="dog"
-        initialValue='Jack Russell Terrier'
+        initialValue="Jack Russell Terrier"
         .options=${this.options}
-        .formUpdate=${this.formUpdate}
       />
     </form>`;
   }

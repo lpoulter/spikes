@@ -27,9 +27,14 @@ export class AxSelect extends LitElement {
     this.renderRoot.querySelector('#pet-select').value = this.initialValue;
   }
 
-  
   onChange(event) {
-    this.formUpdate([this.name, event.target.value]);
+    // composed need for the event to pass the shadow boundary
+    const formUpdated = new CustomEvent('form-updated', {
+      bubbles: true,
+      composed: true,
+      detail: { name: this.name, value: event.target.value },
+    });
+    this.dispatchEvent(formUpdated);
   }
 
   render() {
