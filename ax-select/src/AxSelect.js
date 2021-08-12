@@ -19,9 +19,15 @@ export class AxSelect extends LitElement {
       formUpdate: { type: Function },
       name: { type: String },
       value: { type: String },
+      initialValue: { type: String },
     };
   }
 
+  firstUpdated() {
+    this.renderRoot.querySelector('#pet-select').value = this.initialValue;
+  }
+
+  
   onChange(event) {
     this.formUpdate([this.name, event.target.value]);
   }
@@ -29,8 +35,12 @@ export class AxSelect extends LitElement {
   render() {
     return html`
       <label for="pet-select">${this.label}</label>
-
-      <select name=${this.name} id="pet-select" @change="${this.onChange}">
+      <select
+        name=${this.name}
+        id="pet-select"
+        @change="${this.onChange}"
+        value="Dachshund"
+      >
         <option value="">--Please choose an option--</option>
         ${this.options.map(
           option => html`<option value=${option.value}>${option.label}</option>`

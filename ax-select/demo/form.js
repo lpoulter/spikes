@@ -4,8 +4,8 @@ import '../ax-select.js';
 export class AxForm extends LitElement {
   static get styles() {
     return css`
-      p {
-        color: blue;
+      span {
+        color: red;
       }
     `;
   }
@@ -21,6 +21,9 @@ export class AxForm extends LitElement {
     this.options = [
       { label: 'sausage', value: 'Dachshund' },
       { label: 'Jack Russell', value: 'Jack Russell Terrier' },
+      { label: 'French Bulldog', value: 'FB' },
+      { label: 'German Shepherd', value: 'GS' },
+      { label: 'Retrievers', value: 'Golden Retriever' },
     ];
     this.data = { dog: 'Dachshund' };
     this.formUpdate = this.formUpdate.bind(this);
@@ -33,15 +36,22 @@ export class AxForm extends LitElement {
   }
 
   render() {
-    return html` <pre>${JSON.stringify(this.data)}</pre>
-      <form>
-        <ax-select
-          label="pick one"
-          name="dog"
-          .options=${this.options}
-          .formUpdate=${this.formUpdate}
-        />
-      </form>`;
+    return html` <form>
+      <ul>
+        <li>Takes a list of options</li>
+        <li>calls a callback when option selected with option selected.</li>
+        <li>Initialize with a default item</li>
+      </ul>
+
+      <pre>${JSON.stringify(this.data)}</pre>
+      <ax-select
+        label="pick one"
+        name="dog"
+        initialValue='Jack Russell Terrier'
+        .options=${this.options}
+        .formUpdate=${this.formUpdate}
+      />
+    </form>`;
   }
 }
 
