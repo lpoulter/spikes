@@ -1,3 +1,4 @@
+/* eslint-disable lit-a11y/no-invalid-change-handler */
 import { html, css, LitElement } from 'lit-element';
 
 export class AxSelect extends LitElement {
@@ -22,7 +23,7 @@ export class AxSelect extends LitElement {
   }
 
   onChange(event) {
-    this.formUpdate([ this.name, event.target.value]);
+    this.formUpdate([this.name, event.target.value]);
   }
 
   render() {
